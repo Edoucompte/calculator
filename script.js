@@ -63,10 +63,9 @@ box[5].onclick = ()=> {
 
 // validation or result
 box[18].onclick= ()=>{
-    box[0].textContent += box[18].textContent;
-
+    
     operators= box[0].textContent.split(' ');
-
+    
     //Multiplication case
     do {
         timesIndex= operators.indexOf('*');
@@ -109,9 +108,9 @@ box[18].onclick= ()=>{
                     operators = operators.slice(2);
                     operators[0]= res;
                     break;
-
-                default:
-                    operators = operators.slice(0,timesIndex).concat(operators.slice(timesIndex+2));
+                    
+                    default:
+                        operators = operators.slice(0,timesIndex).concat(operators.slice(timesIndex+2));
                     operators[timesIndex-1]= res;
                     break;
             }
@@ -121,11 +120,40 @@ box[18].onclick= ()=>{
         timesIndex= operators.indexOf('/');
     } while (timesIndex>-1);
 
-    // adition case
+
+    // addition case
     do {
         timesIndex= operators.indexOf('+');
         if(timesIndex>-1){
             res = add(operators[timesIndex-1], operators[timesIndex+1]);
+            switch (timesIndex) {
+                case operators.length-2:
+                    operators = operators.slice(0,-2);
+                    operators[timesIndex-1]= res;
+                    break;
+            
+                case 1:
+                    operators = operators.slice(2);
+                    operators[0]= res;
+                    break;
+
+                    default:
+                    operators = operators.slice(0,timesIndex).concat(operators.slice(timesIndex+2));
+                    operators[timesIndex-1]= res;
+                    break;
+            }
+        operators.join(' ');
+        console.log(operators);
+    }
+    timesIndex= operators.indexOf('+');
+} while (timesIndex>-1);
+
+
+// substraction case
+do {
+    timesIndex= operators.indexOf('-');
+    if(timesIndex>-1){
+        res = substract(operators[timesIndex-1], operators[timesIndex+1]);
             switch (timesIndex) {
                 case operators.length-2:
                     operators = operators.slice(0,-2);
@@ -147,38 +175,13 @@ box[18].onclick= ()=>{
         }
         timesIndex= operators.indexOf('-');
     } while (timesIndex>-1);
-
-    // substraction case
-    do {
-        timesIndex= operators.indexOf('/');
-        if(timesIndex>-1){
-            res = divide(operators[timesIndex-1], operators[timesIndex+1]);
-            switch (timesIndex) {
-                case operators.length-2:
-                    operators = operators.slice(0,-2);
-                    operators[timesIndex-1]= res;
-                    break;
-            
-                case 1:
-                    operators = operators.slice(2);
-                    operators[0]= res;
-                    break;
-
-                default:
-                    operators = operators.slice(0,timesIndex).concat(operators.slice(timesIndex+2));
-                    operators[timesIndex-1]= res;
-                    break;
-            }
-        operators.join(' ');
-        console.log(operators);
-        }
-        timesIndex= operators.indexOf('/');
-    } while (timesIndex>-1);
+    box[0].textContent += box[18].textContent;
+    box[0].textContent += operators[0];
 }
 
 //the four basics functions
 function add(a, b) {
-    return a + b;
+    return parseInt(a) + parseInt(b);
 }
 
 function substract(a, b) {
