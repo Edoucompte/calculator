@@ -1,0 +1,31 @@
+.child{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    display: flex;
+}
+
+#container{
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(5, 5dvw);
+    grid-template-rows: repeat(5, 14dvh);
+    gap: .6rem;
+    margin: auto;
+    padding: 1%;
+}
+
+.box0{
+    grid-area: 1/ 1 / 1/ 6;
+}
+
+.box15{
+    grid-area: 4/ 5 / 6/ 5;
+}
+
+.box18{
+    grid-area: 5/ 3/ 5 / 5;
+}
